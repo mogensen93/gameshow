@@ -1,0 +1,793 @@
+html {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #d9d9d9;            
+  overflow-x: hidden;  font-family: 'Roboto', sans-serif;
+  user-select: none;
+
+
+
+  margin: 0;
+  background-image: linear-gradient(
+    80deg,
+    hsl(240deg 29% 91%) 0%,
+    hsl(228deg 79% 90%) 33%,
+    hsl(228deg 79% 90%) 72%,
+    hsl(240deg 29% 91%) 100%
+  );
+min-height: 100vh;
+}
+
+.logo-initial {
+  width: 1000px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  position: absolute;
+  transition: top 0.5s ease;
+}
+
+
+.gradiantRed {
+  background-image: linear-gradient(
+  80deg,
+  hsl(240deg 29% 91%) 0%,
+  hsl(352deg 66% 89%) 33%,
+  hsl(352deg 66% 89%) 72%,
+  hsl(240deg 29% 91%) 100%
+);
+}
+
+.gradiantBlue {
+  background-image: linear-gradient(
+    80deg,
+    hsl(240deg 29% 91%) 0%,
+    hsl(228deg 79% 90%) 33%,
+    hsl(228deg 79% 90%) 72%,
+    hsl(240deg 29% 91%) 100%
+  );
+}
+
+h1 {
+  color: #333;
+  margin: 0;
+}
+
+#red {
+  color: #ff5c5c;
+}
+
+#redTurn,
+#blueTurn {
+  display: none;
+  padding: 12px;
+  position: fixed;
+  background-color: #1267C8;
+  width: 400px;
+  left: calc(50% - 200px);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+  color:white;
+  border-bottom-left-radius: 55px;
+  border-bottom-right-radius: 55px;
+  z-index: 20;
+}
+
+#blue {
+  color: rgb(114, 114, 255);
+
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px;
+  color: white;
+  background: #C94FAC;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  border-radius: 4px;
+}
+
+button:hover {
+  scale: 1.02;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
+.introScreen {
+  display: block;
+  position: absolute;
+  left: calc(50%);
+  bottom: calc(50% - 250px);
+  transform: translate(-50%, -50%);
+  width: 300px;
+  opacity: 0;
+  transition: all 0.15s ease-in-out;
+  z-index: 3;
+
+}
+
+.intro-button {
+  font-size: 16px;
+  display: block;
+  text-decoration: none;
+  color: white;
+  border: none;
+  cursor: pointer;  background: #C94FAC;
+  transition: all 0.15s ease-in-out;
+  text-align: center;
+  width: 100%;
+  height: 20px;
+  z-index: 2;  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:4px;
+  margin: 20px;
+}
+
+button.intro-button {
+  padding: 30px;
+
+}
+
+a.intro-button {
+  padding: 20px 0;
+
+}
+
+
+.intro-button:hover {
+  scale: 1.02;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
+
+
+/* SCORE */
+.score-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: none;
+  justify-content: space-between;
+  transition: all 1s ease-in-out;
+}
+
+#teamBlueContainer:hover, .score-container #teamRedContainer:hover {
+scale: 1.5;}
+
+.score-container #teamBlueContainer {
+  background-color: #1267C8;
+  width: 120px;
+  height: auto;
+  color: white;
+  border-bottom-right-radius: 55px;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.score-container #teamRedContainer {
+  background-color: #ff5c5c;
+  width: 120px;
+  height: auto;
+  border-bottom-left-radius: 55px;
+  transition: all 0.25s ease-in-out;
+  color: white;  box-shadow: -10px 10px 5px 0px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+}
+
+#teamBlueScore,
+#teamRedScore {
+  font-size: 32px;
+  font-weight: bolder;
+  transition: all 0.5s ease-in-out;
+}
+
+.incrementScoreContainer {
+  padding-bottom:80px;
+}
+
+.settingsButton {
+  display: block;
+  width: 50%;
+}
+
+.settings-points {
+  width: 20%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+}
+
+.settings {
+  opacity: 0;
+  width: 500px;
+  height: 0;
+  margin-top: 5%;
+  margin-left: calc(50% - 250px);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding:4px;
+  z-index: 20;
+  color: rgb(0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(2000px);
+}
+
+
+.player-list {
+  margin: 8px auto ;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  width: 500px;
+  min-height:332px;
+}
+
+.player-list li {
+  margin-bottom: 10px;
+}
+
+
+
+/* PRE GAME SCREEN */
+.preGameScreen {
+  padding: 40px;
+  width: 500px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  padding: 10px;
+  transition: all 5s ease-in-out;
+  opacity: 0;
+  transition: opacity 0.5s ease; /* Add a transition to the 'opacity' property */
+}
+
+.gameOptionsContainer {
+  height: 0;
+  width: calc(500px - 16px);
+  transform: translateX(-2000px);
+  margin: 8px auto;
+  border-radius: 8px;
+  padding:4px;
+  column-count: 2; /* Split content into two columns */
+  column-gap: 20px; /* Gap between columns */
+  max-width: 800px; /* Adjust the maximum width of the container */
+  text-align: left;
+}
+
+#categories, #gameOptions, #numberOfGames {
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 0 16px 24px 16px;
+
+}
+
+#numberOfGames{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.numberOfPlayers {
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 8px auto;
+  border-radius: 8px;
+  padding:4px;
+  border: 2px solid #eeeeee;
+}
+
+.numberOfGames {
+  display: block;
+  margin: auto;
+  font-size: 16px;
+  text-align: center;
+  width: 80px;
+  border: 2px solid #eeeeee;
+}
+
+#playerCount {
+  display: block;
+  margin: auto;
+  font-size: 24px;
+  text-align: center;
+  width: 80px;
+  border: 2px solid #eeeeee;
+}
+
+#inputFieldsContainer {
+  display: grid;
+  opacity: 0;
+  height: 0;
+  grid-template-columns: 1fr 1fr;
+  transform: translateX(-1999px);
+}
+
+.team-containerBlue,
+.team-containerRed {
+  padding-bottom: 32px;
+  margin: 8px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  
+
+}
+
+.team-containerRed {
+  background-color: rgb(255, 92, 92);
+  margin: 8px;
+}
+
+.team-containerBlue {
+  background-color: #1267C8;
+}
+
+#savePlayersButton {
+  display: none;
+  margin: 16px auto;
+  cursor: pointer;
+}
+
+.player-input {
+  font-size: 14px;
+  display: block;
+  margin: 16px auto;
+  border-radius: 8px;
+  height: 32px;
+  text-align: center;
+  border: none;
+}
+
+/* GAME SCREEN */
+.gameScreen {
+  display: none;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+  padding: 120px;
+  overflow: hidden;
+  /* Ensure the container clips the hidden content */
+}
+
+
+.gameTile {
+  background-color: #ffffff;
+  padding: 20px;
+  font-size: 24px;
+  text-align: center;
+  transition: opacity 0.5s ease-in-out;
+  position: relative;
+  height: 310px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  margin-top: -100px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  transition: all 0.25s ease-in-out;  
+  border-radius: 4px;
+}
+
+.gameTile > .tileImg {
+  opacity: 1;
+  transition: all 0.25s ease-in-out;
+  transform: translateY(0); /* Initial position */
+  width: 50%;
+
+}
+.gameTile:hover .tileImg {
+  transform: translateY(-80px);
+  width: 30%;
+}
+
+.gameTile:hover {
+  box-shadow: 0px 0px 16px 14px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.game-type {
+  font-style: italic;
+  position: absolute;
+  color: #aaa9a9;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+  transform: translateY(100px);
+  font-weight: 300;
+}
+
+.gameTile:hover .game-type {
+  opacity: 1;
+  transform: translateY(30px);
+  font-size: 40px;
+
+}
+
+.gameCard {
+  display: none;
+  width: 1000px;
+  height: 1000px;
+  margin-top: 5%;
+  margin-left: calc(50% - 500px);
+  z-index: 20;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+  color: rgb(0, 0, 0);
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  text-align: left;
+  left: 0;
+  right: 0;  
+  border-radius: 4px;
+  bottom: 0;
+  resize: both;
+  padding: 16px;  overflow: auto;
+
+}
+
+.gameCardTitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(255, 255, 255); /* Coral red */
+  background-color: black;
+  border-radius: 4px;
+  margin: 0;
+  border-bottom: 4px solid black;
+  text-align: left;
+
+  padding:16px;
+}
+
+.card-button {
+  width: calc(100% - 32px);
+  position: absolute;
+  margin: 0px;
+  bottom: 16px;
+  left: 16px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.afterGameScreen {
+  transform: translate(-2000px);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 16px;
+  z-index: 10;
+  position: fixed;
+  width: 600px;
+  min-width: 300px;
+  margin-top: 15%;
+  top: 0;
+  left: calc(50% - 316px);
+  transition: all 1.0s ease-in-out;
+
+}
+
+.aftergame-points {
+  font-size:20px;
+  margin: 16px;
+  display: block;
+}
+
+.aftergame-points-title{
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  background-color: black;
+  border-radius: 4px;
+  margin: 0;
+  border-bottom: 4px solid black;
+  text-align: left;
+  padding: 16px;
+}
+
+.activeCard {
+  position: absolute;
+  transition: all 1.0s ease-in-out;
+  transform: translateX(-2000px);
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/*SETTINGS */
+
+.settings-button {
+  padding: 4px;
+  margin: 0;
+  display: none;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-top-left-radius: 10px;
+  border: unset;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  transition: all .1s ease-in-out;
+  overflow: hidden;
+}
+
+.music-button {
+  padding: 4px;
+  margin: 0;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-top-right-radius: 10px;
+  border: unset;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  transition: all .1s ease-in-out;
+  overflow: hidden;
+}
+
+.settings-button:hover,
+.music-button:hover {
+  scale: 1.15;
+}
+
+.playerlistTeamRed {
+  background-color: #ff5c5c
+
+}
+
+.playerlistTeamBlue {
+  background-color: #1267C8;
+
+}
+
+.playerlistTeamRed,
+.playerlistTeamBlue {
+  width: 50%;
+  margin: 0 8px 16px;
+  color: white;
+  font-size: 20px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+
+
+
+/* MISC */
+
+.red-background {
+  color: white;
+  background-color: rgb(255, 92, 92);
+
+}
+
+.blue-background {
+  color: white;
+  background-color: #1267C8;
+}
+
+.white-background {
+  color: black;
+  background-color: white;
+}
+
+.img {
+  width: 1000px;
+  max-height: 500px;
+  padding-top: 32px;
+  object-fit: contain;
+
+}
+
+.link {
+  font-size: 16px;
+  text-decoration: none;
+  color: white;
+  border: none;
+  cursor: pointer;  background: #71d476;
+  transition: all 0.15s ease-in-out;
+  width: calc(100% - 32px);
+  position: absolute;
+  margin: 0px;
+  bottom: 16px;
+  text-align: center;
+  left: 16px;
+  z-index: 2;
+  padding: 20px 0;
+  border-radius:4px;
+}
+
+.link:hover {
+  scale: 1.02;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
+
+
+.description{
+  width: 800px;
+  font-size: 1rem;
+  margin: 0 16px 0;
+  
+}
+
+.fade-in-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#gameHasEnded {
+    display: none;
+    width: 1000px;
+    height: 1000px;
+    margin-top: 5%;
+    margin-left: calc(50% - 500px);
+    z-index: 20;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.15);
+    color: rgb(0, 0, 0);
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  
+}
+#scoreGraph {
+  width: 1000px;
+  max-height: 500px;
+  padding-top: 32px;
+}
+.show {
+  opacity: 1; /* When the 'show' class is added, the element will appear smoothly */
+}
+
+.hide {
+  opacity: 0;
+  height: 0;
+}
+
+
+/* Styling for the checkboxes */
+input[type="checkbox"] {
+  appearance: none; /* Hide the default checkbox */
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border: 2px solid #eeeeee;
+  border-radius: 5px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 5px;
+  background-size: cover;
+  background-position: center;
+}
+
+input[type="checkbox"]:checked {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2315be7f'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+
+}
+
+/* Styling for the labels */
+label {
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Styling for the text beside the checkbox */
+.check-text {
+  margin-left: 10px;
+}
+
+.card-played {
+  cursor: not-allowed;
+  box-shadow: unset;
+  filter: brightness(80%);
+
+}
+
+.card-played:hover {
+  transform:scale(1) ;
+  box-shadow: unset;
+}
+
+.text-bubble {
+  position: absolute;
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 20px;
+  z-index: 10;
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.wiggle {
+  animation: wiggle 2s linear;
+  opacity: 1;
+
+}
+
+.plus-one {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: translate(2px,-50px);
+  }
+  10% {
+    transform: translate(5px, -10vh);
+  }
+  20% {
+    transform: translate(7px, -20vh);
+  }
+  30% {
+    transform: translate(-5px, -30vh);
+  }
+  40% {
+    transform: translate(-8px, -40vh);
+  }
+  50% {
+    transform: translate(2px, -50vh);
+  }
+  60% {
+    transform: translate(19px, -60vh);
+  }
+  70% {
+    transform: translate(-2px, -70vh);
+  }
+  80% {
+    transform: translate(-3px, -80vh);
+  }
+  90% {
+    transform: translate(2px, -90vh);
+  }
+  100% {
+    transform: translate(0, -100vh); /* Move upwards and sideways until out of the frame */
+  }
+}
+.increment-blue, .increment-red {
+  position: relative;
+}
+
+#winner{
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  background-color: black;
+  border-radius: 4px;
+  margin: 0;
+  border-bottom: 4px solid black;
+  text-align: left;
+  padding: 16px;
+  margin: 16px;
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="./img/favicon.svg" type="image/svg+xml" />
+
+<title>Tilføj spil</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .arrow-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .arrow-container:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateX(-5px); /* Shift container slightly to the left */
+  }
+  .arrow {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    clip-path: polygon(100% 0, 100% 100%, 0 50%);
+    transition: clip-path 0.3s ease;
+  }
+
+  .required-label:after {
+    content: '*';
+    color: red;
+  }
+  .disclaimer {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  textarea {
+    resize: vertical;
+  }
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Tilføj spil</h1>
+  <form id="sample-form">
+    <div class="form-group">
+      <label for="title">Titel *</label>
+      <input type="text" id="title" name="title" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Beskrivelse af opgaven *</label>
+      <textarea id="description" name="description" rows="4" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="points">Regler for uddeling af points *</label>
+        <input type="text" id="points" name="points" required>
+      </div>
+    <div class="form-group">
+        <label for="type">Kategori/Type af opgave. E.g: Kortspil *</label>
+        <input type="text" id="type" name="type" required>
+      </div>
+    <div class="form-group">
+      <label for="link">Link til spil</label>
+      <input type="text" id="link" name="link">
+    </div>
+    <div class="form-group">
+      <label for="img">Billed URL</label>
+      <input type="text" id="img" name="img">
+    </div>
+    <div class="form-group">
+      <label for="video">Youtube URL</label>
+      <input type="text" id="video" name="video" >
+    </div>
+    <div class="form-group">
+        <label for="replayable">Kan man spille det flere gange?</label>
+        <select id="replayable" name="replayable" required>
+          <option value="true">Ja</option>
+          <option value="false">Nej</option>
+        </select>
+      </div>
+    <div class="form-group">
+      <label for="online">Kan det spilles Online/På discord</label>
+      <select id="online" name="online" required>
+        <option value="true">Ja</option>
+        <option value="false">Nej</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="alcohol">Alkohol involveret?</label>
+      <select id="alcohol " name="alcohol" required>
+        <option value="false">Nej</option>
+        <option value="true">Ja</option>
+      </select>
+    </div>
+    <div class="form-group">
+        <label for="author">Mit navn er *</label>
+        <input type="text" id="author" name="author" required>
+      </div>
+
+    <button type="submit"><span class="save-button-text">Gem</span><span class="success-icon" style="display: none;">&#10004;</span> <!-- Checkmark icon -->  </button>
+  </form>
+  <div class="disclaimer">
+    Felter markeret * skal udfyldes.
+  </div>
+</div>
+<a href="index.html" class="arrow-link">
+  <div class="arrow-container">
+    <div class="arrow"></div>
+  </div>
+</a>
+<script>
+const form = document.getElementById('sample-form');
+const successIcon = document.querySelector('.success-icon'); // Select the success icon element
+const saveButtonText = document.querySelector('.save-button-text'); // Select the success icon element
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const formData = new FormData(form);
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+  
+  const webhookURL = "https://script.google.com/macros/s/AKfycbzr2iUhEZAiA2Rqqg4QaeGkzPK8DG3ppMZmRXCkTHySCTv-8KdQQgqShmCfCuvuHjQt-Q/exec?gid=0";
+
+  const queryString = Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`).join('&');
+  const fullURL = `${webhookURL}&${queryString}`;
+
+  // Now let's send the GET request to the fullURL using fetch
+  fetch(fullURL)
+    .then(response => response.json())
+    .then(responseData => {
+      console.log(responseData); // You can handle the response data here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+    
+  // Show success icon
+  successIcon.style.display = 'block';
+  saveButtonText.style.display = 'none';
+
+  setTimeout(() => {
+    // Hide success icon after 2 seconds
+    successIcon.style.display = 'none';
+    saveButtonText.style.display = 'block';
+  }, 2000); // 2000 milliseconds (2 seconds)
+
+  form.reset();
+});
+</script>
+</body>
+</html>

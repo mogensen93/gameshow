@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="gradiantBlue background">
+  <div class="header">
+    <div class="logo-initial">
+      <img src="./img/logo.png" alt="Mogensens gameshow Logo" id="logo" />
+    </div>
+    <h1 id="blueTurn">Blå</h1>
+    <h1 id="redTurn">Rød</h1>
+    <div class="score-container">
+      <div class="team-container" id="teamBlueContainer">
+        <p id="teamBlueScore">0</p>
+      </div>
+      <div class="team-container" id="teamRedContainer">
+        <p id="teamRedScore">0</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="introScreen">
+      <button href="add-game.html" class="intro-button" onclick="showPregameScreen()"> Start</button>
+      <a href="add-game.html" class="intro-button"> Tilføj spil</a>
+      <a href="overview-of-games.html" class="intro-button"> Overblik af spil</a>
+</div>
+
+  <div class="preGameScreen">
+    <div class="numberOfPlayers">
+      <h2 class="preGameScreenTitle">Antal spillere</h2>
+      <input type="number" id="playerCount" />
+      <button id="createInputFields" onclick="createInputFields()">Næste &raquo;</button>
+    </div>
+  
+    <div id="inputFieldsContainer"></div>
+    <div class="gameOptionsContainer">
+      <div id="categories">      
+        <h2 style="text-align: center;">Kategorier</h2>
+      </div>
+      <div id="gameOptions">      
+        <h2 style="text-align: center;">Filtre</h2>
+      </div>
+      <div id="numberOfGames">      
+        <h2 style="text-align: center;">Antal spil</h2>
+      </div>
+    </div>
+    <button id="savePlayersButton" class="button-primary" onclick="savePlayers()" >Start spil</button>
+
+  </div>
+
+  <div class="gameScreen"></div>
+  <div class="activeCard"></div>
+
+  <div class="afterGameScreen">
+
+    <div class="incrementScoreContainer">
+      <h2 class="aftergame-points-title">Points</h2>
+      <span class="aftergame-points"></span>
+      <button onclick="incrementScore('teamBlue')" class="blue-background" id="increment-blue">+1</button>
+      <button onclick="incrementScore('teamRed')" class="red-background" id="increment-red">+1</button>
+    </div>
+    <button onClick="closeAfterGameScreen()" class="card-button">Luk &raquo;</button>
+  </div>
+
+  <button onClick="showSettings()" class="settings-button">
+    <img width="30" height="30" src="./img/settings.png"alt="Settings">
+  </button>
+
+  <div class="player-list-container settings">
+    <div class="player-list" id="playerList"></div>
+    <button onclick="incrementScore('teamBlue')" class="blue-background settings-points">Plus point</button>
+    <button onClick="decrementScore('teamBlue')" class="blue-background settings-points">Minus point</button>
+    <button onclick="incrementScore('teamRed')" class="red-background settings-points">Plus point</button>
+    <button onClick="decrementScore('teamRed')" class="red-background settings-points">Minus point</button>
+    <div style="display: flex; width: 100%; border-top: 1px solid rgb(221, 221, 221);">
+      <button onclick="resetScores()" class="settingsButton">Nulstil score</button>
+      <button onClick="switchTurns()" class="settingsButton">Skift tur</button>
+      <button onclick="resetGame()" class="settingsButton">Genstart spil</button>
+      <button onclick="closeSettings()" class="settingsButton">Luk &raquo;</button>
+    </div>
+  </div>
+
+  <div id="gameHasEnded">
+    <h2 id="winner"></h2>
+    <p id="winner-score"></p>
+    <canvas id="scoreChart"></canvas>
+    <button onclick="resetGame()" class="card-button">Genstart spil</button>
+  </div>
+
+  <div class="overlay" id="overlay" style="display: none;"> </div>
+  <script src="./js/fetchGames.js"></script>
+  <script src="./js/helper.js"></script>
+  <script src="./js/graph.js"></script>
+  <script src="./js/score.js"></script>
+  <script src="./js/settings.js"></script>
+  <script src="./js/misc.js"></script>
+  <script src="./js/startGame.js"></script>
+  <script src="./js/afterGame.js"></script>
+  <script src="./js/gameHasEnded.js"></script>
+
+</body>
+
+</html>

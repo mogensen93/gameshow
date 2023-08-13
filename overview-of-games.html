@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overblik af spil</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<link rel="icon" href="./img/favicon.svg" type="image/svg+xml" />
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .arrow-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .arrow-container:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateX(-5px); /* Shift container slightly to the left */
+  }
+  .arrow {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    clip-path: polygon(100% 0, 100% 100%, 0 50%);
+    transition: clip-path 0.3s ease;
+  }
+
+    .container {
+      width: 100%;
+      max-width: 80vw;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .fixed-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #f2f2f2;
+      border-right: 1px solid #f2f2f2; /* Add vertical borders */
+
+    }
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+    td a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    img {
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 4px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Overblik af spil</h1>
+        <table>
+            <thead class="fixed-header">
+                <tr>
+              <th>Titel</th>
+              <th>Beskrivelse</th>
+              <th>Points regler</th>
+              <th>Link</th>
+              <th>Billede</th>
+              <th>Video</th>
+              <th>Kategori</th>
+              <th>Online</th>
+              <th>Skaber</th>
+              <th>genspilbar'</th>
+            </tr>
+          </thead>
+          <tbody id="gamesTableBody">
+            <!-- Data will be populated here -->
+          </tbody>
+        </table>
+      </div>
+      <a href="index.html" class="arrow-link">
+        <div class="arrow-container">
+          <div class="arrow"></div>
+        </div>
+      </a>
+<script src="./js/fetchGames.js"></script>
+<script>
+    fetchGamesData().then((games) => {
+      const gamesTableBody = document.getElementById('gamesTableBody');
+  
+      games.forEach((game) => {
+        const row = document.createElement('tr');
+  
+        const titleCell = document.createElement('td');
+        titleCell.textContent = game.title;
+        row.appendChild(titleCell);
+  
+        const descriptionCell = document.createElement('td');
+        descriptionCell.textContent = game.description;
+        row.appendChild(descriptionCell);
+
+        const pointsCell = document.createElement('td');
+        pointsCell.textContent = game.points;
+        row.appendChild(pointsCell);
+  
+        const linkCell = document.createElement('td');
+        if (game.link) {
+          const link = document.createElement('a');
+          link.textContent = 'Link';
+          link.href = game.link;
+          link.target = '_blank';
+          linkCell.appendChild(link);
+        }
+        row.appendChild(linkCell);
+  
+        const imgCell = document.createElement('td');
+        if (game.img) {
+          const img = document.createElement('img');
+          img.src = game.img;
+          img.alt = game.title;
+          imgCell.appendChild(img);
+        }
+        row.appendChild(imgCell);
+  
+        const videoCell = document.createElement('td');
+        if (game.video) {
+          const videoLink = document.createElement('a');
+          videoLink.textContent = 'Video';
+          videoLink.href = game.video;
+          videoLink.target = '_blank';
+          videoCell.appendChild(videoLink);
+        }
+        row.appendChild(videoCell);
+  
+        const typeCell = document.createElement('td');
+        typeCell.textContent = game.type;
+        row.appendChild(typeCell);
+  
+        const replayableCell = document.createElement('td');
+        replayableCell.textContent = game.replayable;
+        row.appendChild(replayableCell);
+
+        // Add more cells for other attributes
+        const authorCell = document.createElement('td');
+        authorCell.textContent = game.author;
+        row.appendChild(authorCell);
+  
+        // Add more cells for other attributes
+  
+        gamesTableBody.appendChild(row);
+      });
+    });
+  </script>
+  
+</body>
+</html>
